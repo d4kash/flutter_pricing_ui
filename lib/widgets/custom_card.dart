@@ -4,11 +4,13 @@ import 'package:flutter_pricing_ui/Constants/constant.dart';
 import 'package:flutter_pricing_ui/Screens/page_pricing_detail.dart';
 import 'package:flutter_pricing_ui/widgets/custom_button.dart';
 import 'package:flutter_pricing_ui/widgets/custom_subtitle.dart';
+import 'package:get/get.dart';
 
 class CustomCard extends StatelessWidget {
   final String category;
   final Icon icon;
-  final String categoryData;
+  final List<String> categoryData;
+  final String categoryBody;
   final String price;
   final String threeMonthPrice;
   final int selectedChip;
@@ -19,7 +21,8 @@ class CustomCard extends StatelessWidget {
       required this.categoryData,
       required this.price,
       required this.threeMonthPrice,
-      required this.selectedChip});
+      required this.selectedChip,
+      required this.categoryBody});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class CustomCard extends StatelessWidget {
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: CustomSubtitle(
-                      categoryData: categoryData,
+                      categoryData: categoryBody,
                     ),
                   ),
                   trailing: RichText(
@@ -104,14 +107,16 @@ class CustomCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PricingDetails(
-                                            map: map,
-                                          )));
-                            },
+                            onPressed: () => openDialog(map),
+                            // ()
+                            // {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //           builder: (context) => PricingDetails(
+                            //                 map: map,
+                            //               )));
+                            // },
                             child: const Text("Know more")),
                       ),
                       CustomButton(
@@ -124,5 +129,38 @@ class CustomCard extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  void openDialog(Map<String, dynamic> map) {
+    print(map['categoryData'].length);
+    Get.dialog(
+      AlertDialog(
+        title: Text(map['category']),
+        content: Column(
+          children: [
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: map['categoryData'].length,
+                  itemBuilder: ((context, index) {
+                    return CustomSubtitle(
+                      categoryData: map['categoryData'][index],
+                    );
+                  })),
+            )
+
+            // Text(map['categoryData'][0]),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: const Text("Close"),
+            onPressed: () => Get.back(),
+          ),
+        ],
+      ),
+    );
   }
 }

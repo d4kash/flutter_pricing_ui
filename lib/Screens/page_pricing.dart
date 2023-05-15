@@ -125,10 +125,11 @@ class PricingScreen extends StatelessWidget {
                   return CustomCard(
                     category: pricingData[index]['category'],
                     icon: pricingData[index]['icon'],
-                    categoryData: pricingData[index]['categoryData']["body"],
+                    categoryBody: pricingData[index]['categoryData']["body"],
                     price: pricingData[index]['price'],
                     threeMonthPrice: pricingData[index]['threeMonthPrice'],
                     selectedChip: chipValue.value,
+                    categoryData: pricingData[index]['categoryData']["data"],
                   );
                 },
               ),
