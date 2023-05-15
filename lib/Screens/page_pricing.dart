@@ -67,7 +67,7 @@ class PricingScreen extends StatelessWidget {
     ];
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color(0xffe8f4f8),
+      backgroundColor: Constant.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(4.0),
         child: SingleChildScrollView(
@@ -102,7 +102,7 @@ class PricingScreen extends StatelessWidget {
                               // color of selected chip
                               selectedColor: Colors.blue,
                               // selected chip value
-                              selected: chipValue == index,
+                              selected: chipValue.value == index,
                               // onselected method
                               onSelected: (bool selected) {
                                 chipValue.value = (selected ? index : null)!;
@@ -122,6 +122,7 @@ class PricingScreen extends StatelessWidget {
                 itemCount: pricingData.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
+                  
                   return CustomCard(
                     category: pricingData[index]['category'],
                     icon: pricingData[index]['icon'],

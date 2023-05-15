@@ -15,12 +15,12 @@ class CustomSubtitle extends StatelessWidget {
       const SizedBox(
         width: 10,
       ),
-      FittedBox(
+      Expanded(
         child: Text(
           categoryData,
           // softWrap: true,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 3,
+          // overflow: TextOverflow.ellipsis,
+          // maxLines: 1,
           style: const TextStyle(),
         ),
       )

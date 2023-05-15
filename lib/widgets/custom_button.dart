@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pricing_ui/Constants/constant.dart';
 import 'package:flutter_pricing_ui/Screens/page_pricing_detail.dart';
+import 'package:get/get.dart';
 
 class CustomButton extends StatelessWidget {
   final Map<String, dynamic> mapData;
@@ -24,20 +25,26 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PricingDetails(
-                          map: mapData,
-                        )));
+            Get.to(() => PricingDetails(
+                  map: mapData,
+                ));
+            //   Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) => PricingDetails(
+            //                 map: mapData,
+            //               )));
           },
           child: Row(
-            children: const [
-              Text("Activate this offer"),
-              SizedBox(
-                width: 10,
+            children: [
+              Text(
+                "Activate this offer",
+                style: TextStyle(fontSize: Constant.width / 40),
               ),
-              Card(
+              SizedBox(
+                width: Constant.width / 52,
+              ),
+              const Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Icon(

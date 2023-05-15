@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pricing_ui/Screens/page_pricing.dart';
+import 'package:flutter_pricing_ui/Screens/page_pricing_detail.dart';
+import 'package:flutter_pricing_ui/Screens/page_thanks.dart';
 import 'package:get/get.dart';
 
 void main() {

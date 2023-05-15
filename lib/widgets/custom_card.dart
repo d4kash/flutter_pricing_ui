@@ -26,6 +26,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(price);
     Map<String, dynamic> map = {
       "category": category,
       "icon": icon,
@@ -65,7 +66,7 @@ class CustomCard extends StatelessWidget {
                               ? "\u{20B9}$price"
                               : "\u{20B9}$threeMonthPrice",
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold,color: Colors.black)),
                       TextSpan(
                           text: selectedChip == 0
                               ? '\nPer Month'
@@ -132,26 +133,29 @@ class CustomCard extends StatelessWidget {
   }
 
   void openDialog(Map<String, dynamic> map) {
-    print(map['categoryData'].length);
+    // print(map['categoryData'].length);
     Get.dialog(
       AlertDialog(
         title: Text(map['category']),
         content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 100,
-              width: 100,
+              height: Constant.height/3,
+              width: Constant.width/1.2,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: map['categoryData'].length,
                   itemBuilder: ((context, index) {
-                    return CustomSubtitle(
-                      categoryData: map['categoryData'][index],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomSubtitle(
+                        categoryData: map['categoryData'][index],
+                      ),
                     );
                   })),
-            )
-
-            // Text(map['categoryData'][0]),
+            ),
+            map['selectedChip']==1?const Text("10 days Refund Policy",style: TextStyle(fontStyle: FontStyle.normal,fontWeight: FontWeight.bold,fontSize: 16),):Container()
           ],
         ),
         actions: [
