@@ -70,9 +70,9 @@ class PricingScreen extends StatelessWidget {
       backgroundColor: Constant.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: SingleChildScrollView(
-            child: Obx(
-          () => Column(
+        child:  Obx(
+          () =>SingleChildScrollView(
+            child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -116,23 +116,26 @@ class PricingScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Constant.height / 20,
+                height: Constant.height / 30,
               ),
-              ListView.builder(
-                itemCount: pricingData.length,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  
-                  return CustomCard(
-                    category: pricingData[index]['category'],
-                    icon: pricingData[index]['icon'],
-                    categoryBody: pricingData[index]['categoryData']["body"],
-                    price: pricingData[index]['price'],
-                    threeMonthPrice: pricingData[index]['threeMonthPrice'],
-                    selectedChip: chipValue.value,
-                    categoryData: pricingData[index]['categoryData']["data"],
-                  );
-                },
+              SizedBox(
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: pricingData.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    
+                    return CustomCard(
+                      category: pricingData[index]['category'],
+                      icon: pricingData[index]['icon'],
+                      categoryBody: pricingData[index]['categoryData']["body"],
+                      price: pricingData[index]['price'],
+                      threeMonthPrice: pricingData[index]['threeMonthPrice'],
+                      selectedChip: chipValue.value,
+                      categoryData: pricingData[index]['categoryData']["data"],
+                    );
+                  },
+                ),
               ),
             ],
           ),
