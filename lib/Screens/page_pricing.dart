@@ -85,8 +85,9 @@ class PricingScreen extends StatelessWidget {
                     const Text(
                       "Our Care Plans",
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(height: 10,),
                     Wrap(
                       // list of length 3
                       children: List.generate(
@@ -95,10 +96,13 @@ class PricingScreen extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ChoiceChip(
-                              side: const BorderSide(),
+                              shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+                              // side: const BorderSide(),
 
                               padding: const EdgeInsets.all(8),
-                              label: Text(monthList[index]),
+                              label: Text(monthList[index],style:TextStyle(fontSize: 18)),
                               // color of selected chip
                               selectedColor: Colors.blue,
                               // selected chip value
@@ -120,7 +124,7 @@ class PricingScreen extends StatelessWidget {
               ),
               SizedBox(
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics:const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics())),
                   itemCount: pricingData.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {

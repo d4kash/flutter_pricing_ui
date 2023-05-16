@@ -39,8 +39,14 @@ class CustomCard extends StatelessWidget {
         height: Constant.height / 3.2,
         width: Constant.width / 1.05,
         child: Card(
-          shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+          
+          shape:   ContinuousRectangleBorder(
+             side: BorderSide(
+      color: Colors.deepPurpleAccent, //<-- SEE HERE
+    ),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+         
           elevation: 5,
           child: Padding(
             padding: EdgeInsets.only(top: Constant.height / 30),

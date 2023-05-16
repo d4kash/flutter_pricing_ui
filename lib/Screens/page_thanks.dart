@@ -30,7 +30,7 @@ class ThanksPage extends StatelessWidget {
                 width: Constant.width / 4,
               ),
               const Text(
-                "Thanks",
+                "Thank You!",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
