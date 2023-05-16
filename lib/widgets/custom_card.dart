@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
       "selectedChip": selectedChip
     };
     return SizedBox(
-        height: Constant.height / 3.2,
+        height: selectedChip == 0 ? Constant.height / 3.2 : Constant.height / 3,
         width: Constant.width / 1.05,
         child: Card(
           shape: ContinuousRectangleBorder(
