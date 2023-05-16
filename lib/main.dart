@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pricing UI',
       theme: ThemeData(
-        textTheme: GoogleFonts.firaSansTextTheme(
-          Theme.of(context).textTheme,
-        ),
+          textTheme: GoogleFonts.firaSansTextTheme(
+            Theme.of(context).textTheme,
+          ),
           primarySwatch: Colors.blue,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
