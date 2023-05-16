@@ -39,14 +39,12 @@ class CustomCard extends StatelessWidget {
         height: Constant.height / 3.2,
         width: Constant.width / 1.05,
         child: Card(
-          
-          shape:   ContinuousRectangleBorder(
-             side: BorderSide(
-      color: Colors.deepPurpleAccent, //<-- SEE HERE
-    ),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-         
+          shape: ContinuousRectangleBorder(
+            side: BorderSide(
+              color: Colors.deepPurpleAccent, //<-- SEE HERE
+            ),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           elevation: 5,
           child: Padding(
             padding: EdgeInsets.only(top: Constant.height / 30),
@@ -72,7 +70,9 @@ class CustomCard extends StatelessWidget {
                               ? "\u{20B9}$price"
                               : "\u{20B9}$threeMonthPrice",
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold,color: Colors.black)),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
                       TextSpan(
                           text: selectedChip == 0
                               ? '\nPer Month'
@@ -147,8 +147,8 @@ class CustomCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: Constant.height/3,
-              width: Constant.width/1.2,
+              height: Constant.height / 2.5,
+              width: Constant.width / 1.2,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: map['categoryData'].length,
@@ -161,7 +161,15 @@ class CustomCard extends StatelessWidget {
                     );
                   })),
             ),
-            map['selectedChip']==1?const Text("10 days Refund Policy",style: TextStyle(fontStyle: FontStyle.normal,fontWeight: FontWeight.bold,fontSize: 16),):Container()
+            map['selectedChip'] == 1
+                ? const Text(
+                    "10 days Refund Policy",
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )
+                : Container()
           ],
         ),
         actions: [

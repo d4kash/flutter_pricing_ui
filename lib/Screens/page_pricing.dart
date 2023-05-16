@@ -70,80 +70,93 @@ class PricingScreen extends StatelessWidget {
       backgroundColor: Constant.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(4.0),
-        child:  Obx(
-          () =>SingleChildScrollView(
-            child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Constant.height / 15,
-              ),
-              Center(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Our Care Plans",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10,),
-                    Wrap(
-                      // list of length 3
-                      children: List.generate(
-                        2,
-                        (int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ChoiceChip(
-                              shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-                              // side: const BorderSide(),
+        child: Obx(() => SingleChildScrollView(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(
+                      parent: BouncingScrollPhysics())),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: Constant.height / 15,
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Our Care Plans",
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Wrap(
+                          // list of length 3
+                          children: List.generate(
+                            2,
+                            (int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ChoiceChip(
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  // side: const BorderSide(),
 
-                              padding: const EdgeInsets.all(8),
-                              label: Text(monthList[index],style:TextStyle(fontSize: 18)),
-                              // color of selected chip
-                              selectedColor: Colors.blue,
-                              // selected chip value
-                              selected: chipValue.value == index,
-                              // onselected method
-                              onSelected: (bool selected) {
-                                chipValue.value = (selected ? index : null)!;
-                              },
-                            ),
-                          );
-                        },
-                      ).toList(),
+                                  padding: const EdgeInsets.all(8),
+                                  label: Text(monthList[index],
+                                      style: const TextStyle(fontSize: 18)),
+                                  // color of selected chip
+                                  selectedColor: Colors.blue,
+                                  backgroundColor: Colors.white,
+                                  // selected chip value
+                                  selected: chipValue.value == index,
+                                  // onselected method
+                                  onSelected: (bool selected) {
+                                    chipValue.value =
+                                        (selected ? index : null)!;
+                                  },
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: Constant.height / 30,
+                  ),
+                  SizedBox(
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+
+                      // physics: const BouncingScrollPhysics(
+                      //     parent: AlwaysScrollableScrollPhysics(
+                      //         parent: BouncingScrollPhysics())),
+                      itemCount: pricingData.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomCard(
+                          category: pricingData[index]['category'],
+                          icon: pricingData[index]['icon'],
+                          categoryBody: pricingData[index]['categoryData']
+                              ["body"],
+                          price: pricingData[index]['price'],
+                          threeMonthPrice: pricingData[index]
+                              ['threeMonthPrice'],
+                          selectedChip: chipValue.value,
+                          categoryData: pricingData[index]['categoryData']
+                              ["data"],
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: Constant.height / 30,
-              ),
-              SizedBox(
-                child: ListView.builder(
-                  physics:const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics())),
-                  itemCount: pricingData.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    
-                    return CustomCard(
-                      category: pricingData[index]['category'],
-                      icon: pricingData[index]['icon'],
-                      categoryBody: pricingData[index]['categoryData']["body"],
-                      price: pricingData[index]['price'],
-                      threeMonthPrice: pricingData[index]['threeMonthPrice'],
-                      selectedChip: chipValue.value,
-                      categoryData: pricingData[index]['categoryData']["data"],
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        )),
+            )),
       ),
     ));
   }
