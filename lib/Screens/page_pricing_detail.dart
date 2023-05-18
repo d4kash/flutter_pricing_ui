@@ -44,7 +44,7 @@ class PricingDetails extends StatelessWidget {
                   size: 35,
                 ),
                 onPressed: () {
-                  Get.offAll(() => const PricingScreen());
+                  Get.back();
                 },
               ),
               SizedBox(

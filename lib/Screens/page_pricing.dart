@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pricing_ui/Constants/constant.dart';
+import 'package:flutter_pricing_ui/Model/PricingModel.dart';
 import 'package:flutter_pricing_ui/widgets/custom_card.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -16,7 +19,6 @@ class PricingScreen extends StatelessWidget {
     List<Map<String, dynamic>> pricingData = [
       {
         "category": "Basic Care",
-        "icon": const Icon(CarbonIcons.ai_status),
         "categoryData": {
           "body": "Pediatric care in 15 minutes",
           "data": [
@@ -31,7 +33,6 @@ class PricingScreen extends StatelessWidget {
       },
       {
         "category": "Prime Care",
-        "icon": const Icon(CarbonIcons.ai_status),
         "categoryData": {
           "body":
               "Pediatric care in 15 minutes, lactation,\nnutrition, monthly milestones,\nemergency support",
@@ -48,7 +49,6 @@ class PricingScreen extends StatelessWidget {
       },
       {
         "category": "Holistic Care",
-        "icon": const Icon(CarbonIcons.ai_status),
         "categoryData": {
           "body":
               "Dedicated pediatrician for your baby,\npersonal care plan,\nBest possible baby care",
@@ -132,24 +132,23 @@ class PricingScreen extends StatelessWidget {
                   SizedBox(
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-
-                      // physics: const BouncingScrollPhysics(
-                      //     parent: AlwaysScrollableScrollPhysics(
-                      //         parent: BouncingScrollPhysics())),
                       itemCount: pricingData.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
+                        // try {
+                        var encodedString = json.encode(pricingData);
+                        var modalData = pricingModalFromJson(encodedString);
+                        // print(modalData[index].category);
+                        // } on Exception catch (e) {
+                        //   // TODO
+                        // }
                         return CustomCard(
-                          category: pricingData[index]['category'],
-                          icon: pricingData[index]['icon'],
-                          categoryBody: pricingData[index]['categoryData']
-                              ["body"],
-                          price: pricingData[index]['price'],
-                          threeMonthPrice: pricingData[index]
-                              ['threeMonthPrice'],
+                          category: modalData[index].category,
+                          categoryBody: modalData[index].categoryData.body,
+                          price: modalData[index].price,
+                          threeMonthPrice: modalData[index].threeMonthPrice,
                           selectedChip: chipValue.value,
-                          categoryData: pricingData[index]['categoryData']
-                              ["data"],
+                          categoryData: modalData[index].categoryData.data,
                         );
                       },
                     ),

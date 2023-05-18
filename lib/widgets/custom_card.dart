@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class CustomCard extends StatelessWidget {
   final String category;
-  final Icon icon;
+
   final List<String> categoryData;
   final String categoryBody;
   final String price;
@@ -17,7 +17,6 @@ class CustomCard extends StatelessWidget {
   const CustomCard(
       {super.key,
       required this.category,
-      required this.icon,
       required this.categoryData,
       required this.price,
       required this.threeMonthPrice,
@@ -29,7 +28,6 @@ class CustomCard extends StatelessWidget {
     // print(price);
     Map<String, dynamic> map = {
       "category": category,
-      "icon": icon,
       "categoryData": categoryData,
       "price": selectedChip == 0 ? price : threeMonthPrice,
       "threeMonthPrice": threeMonthPrice,
@@ -51,7 +49,7 @@ class CustomCard extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  leading: icon,
+                  leading: const Icon(CarbonIcons.ai_status),
                   title: Text(
                     category,
                     style: const TextStyle(
