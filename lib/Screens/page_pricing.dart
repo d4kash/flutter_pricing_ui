@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pricing_ui/Constants/constant.dart';
 import 'package:flutter_pricing_ui/Model/PricingModel.dart';
 import 'package:flutter_pricing_ui/widgets/custom_card.dart';
@@ -14,6 +15,7 @@ class PricingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late RxList<dynamic> pricingdata = [].obs;
     RxInt chipValue = 0.obs;
     List monthList = ["1 Month", "3 Months"];
     List<Map<String, dynamic>> pricingData = [
@@ -65,6 +67,15 @@ class PricingScreen extends StatelessWidget {
         "threeMonthPrice": "9999"
       }
     ];
+
+    Future<String> loadData() async {
+      var data = await rootBundle.loadString("assets/pricing_data.json");
+      // setState(() {
+      pricingdata.value = json.decode(data);
+      // });
+      return "success";
+    }
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: Constant.backgroundColor,
@@ -130,29 +141,51 @@ class PricingScreen extends StatelessWidget {
                     height: Constant.height / 30,
                   ),
                   SizedBox(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: pricingData.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        // try {
-                        var encodedString = json.encode(pricingData);
-                        var modalData = pricingModalFromJson(encodedString);
-                        // print(modalData[index].category);
-                        // } on Exception catch (e) {
-                        //   // TODO
-                        // }
-                        return CustomCard(
-                          category: modalData[index].category,
-                          categoryBody: modalData[index].categoryData.body,
-                          price: modalData[index].price,
-                          threeMonthPrice: modalData[index].threeMonthPrice,
-                          selectedChip: chipValue.value,
-                          categoryData: modalData[index].categoryData.data,
-                        );
-                      },
-                    ),
-                  ),
+                      child: FutureBuilder(
+                          future: loadData(),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return Obx(() => ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: pricingdata.length,
+                                    shrinkWrap: true,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      try {
+                                        var encodedString =
+                                            json.encode(pricingdata);
+                                        var modalData =
+                                            pricingModalFromJson(encodedString);
+                                        // print(modalData[index].category);
+
+                                        return CustomCard(
+                                          category: modalData[index].category,
+                                          categoryBody: modalData[index]
+                                              .categoryData
+                                              .body,
+                                          price: modalData[index].price,
+                                          threeMonthPrice:
+                                              modalData[index].threeMonthPrice,
+                                          selectedChip: chipValue.value,
+                                          categoryData: modalData[index]
+                                              .categoryData
+                                              .data,
+                                        );
+                                      } on Exception catch (e) {
+                                        // TODO
+                                      }
+                                    },
+                                  ));
+                            } else {
+                              return Container();
+                            }
+                          })),
                 ],
               ),
             )),
