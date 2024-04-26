@@ -7,10 +7,7 @@ import 'package:get/get.dart';
 
 class PricingDetails extends StatelessWidget {
   final Map<String, dynamic> map;
-  const PricingDetails({
-    super.key,
-    required this.map
-  });
+  const PricingDetails({super.key, required this.map});
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +38,13 @@ class PricingDetails extends StatelessWidget {
         children: [
           Row(
             children: [
-               IconButton(
+              IconButton(
                 icon: Icon(
                   CarbonIcons.close,
                   size: 35,
                 ),
                 onPressed: () {
-                  Get.offAll(()=> const PricingScreen());
+                  Get.back();
                 },
               ),
               SizedBox(
@@ -174,10 +171,12 @@ class OrderInfo extends StatelessWidget {
                     isLoading.value = false;
                     Get.to(() => const ThanksPage());
                   },
-                  child:isLoading.value?const CircularProgressIndicator(): const Text(
-                    "Checkout",
-                    style: TextStyle(fontSize: 18),
-                  ))))
+                  child: isLoading.value
+                      ? const CircularProgressIndicator()
+                      : const Text(
+                          "Checkout",
+                          style: TextStyle(fontSize: 18),
+                        ))))
         ],
       ),
     );
@@ -274,7 +273,18 @@ class ProductCart extends StatelessWidget {
             leading: Image.network(
                 width: 120,
                 height: 100,
-                'https://babynama.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-new.13630e49.webp&w=1920&q=75'),
+                'https://babynama.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-new.13630e49.webp&w=1920&q=75',
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              return child;
+            }, loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
             title: Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text(

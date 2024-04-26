@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class CustomCard extends StatelessWidget {
   final String category;
-  final Icon icon;
+
   final List<String> categoryData;
   final String categoryBody;
   final String price;
@@ -17,7 +17,6 @@ class CustomCard extends StatelessWidget {
   const CustomCard(
       {super.key,
       required this.category,
-      required this.icon,
       required this.categoryData,
       required this.price,
       required this.threeMonthPrice,
@@ -29,31 +28,28 @@ class CustomCard extends StatelessWidget {
     // print(price);
     Map<String, dynamic> map = {
       "category": category,
-      "icon": icon,
       "categoryData": categoryData,
       "price": selectedChip == 0 ? price : threeMonthPrice,
       "threeMonthPrice": threeMonthPrice,
       "selectedChip": selectedChip
     };
     return SizedBox(
-        height: Constant.height / 3.2,
+        height: selectedChip == 0 ? Constant.height / 3.2 : Constant.height / 3,
         width: Constant.width / 1.05,
         child: Card(
-          
-          shape:   ContinuousRectangleBorder(
-             side: BorderSide(
-      color: Colors.deepPurpleAccent, //<-- SEE HERE
-    ),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-         
+          shape: ContinuousRectangleBorder(
+            side: BorderSide(
+              color: Colors.deepPurpleAccent, //<-- SEE HERE
+            ),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           elevation: 5,
           child: Padding(
             padding: EdgeInsets.only(top: Constant.height / 30),
             child: Column(
               children: [
                 ListTile(
-                  leading: icon,
+                  leading: const Icon(CarbonIcons.ai_status),
                   title: Text(
                     category,
                     style: const TextStyle(
@@ -72,7 +68,9 @@ class CustomCard extends StatelessWidget {
                               ? "\u{20B9}$price"
                               : "\u{20B9}$threeMonthPrice",
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold,color: Colors.black)),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
                       TextSpan(
                           text: selectedChip == 0
                               ? '\nPer Month'
@@ -147,8 +145,8 @@ class CustomCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: Constant.height/3,
-              width: Constant.width/1.2,
+              height: Constant.height / 2.5,
+              width: Constant.width / 1.2,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: map['categoryData'].length,
@@ -161,7 +159,15 @@ class CustomCard extends StatelessWidget {
                     );
                   })),
             ),
-            map['selectedChip']==1?const Text("10 days Refund Policy",style: TextStyle(fontStyle: FontStyle.normal,fontWeight: FontWeight.bold,fontSize: 16),):Container()
+            map['selectedChip'] == 1
+                ? const Text(
+                    "10 days Refund Policy",
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )
+                : Container()
           ],
         ),
         actions: [

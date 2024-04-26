@@ -1,0 +1,49 @@
+[
+    {
+      "category": "Basic Care",
+      "categoryData": {
+        "body": "Pediatric care in 15 minutes",
+        "data": [
+          "Pediatric care in 15 minutes",
+          "Instant chat with pediatricians on WhatsApp",
+          "Free pediatrician consultations (day)",
+          "Live Yoga Sessions"
+        ]
+      },
+      "price": "999",
+      "threeMonthPrice": "2499"
+    },
+    {
+      "category": "Prime Care",
+      "categoryData": {
+        "body":
+            "Pediatric care in 15 minutes, lactation,\nnutrition, monthly milestones,\nemergency support",
+        "data": [
+          "Pediatric care in 15 minutes, lactation, nutrition, monthly milestones, emergency support",
+          "Everything in Basic Care",
+          "24x7 free pediatrician consultations",
+          "Monthly growth and milestones tracking by pediatrician",
+          "Lactation and Weaning Support"
+        ]
+      },
+      "price": "1999",
+      "threeMonthPrice": "4999"
+    },
+    {
+      "category": "Holistic Care",
+      "categoryData": {
+        "body":
+            "Dedicated pediatrician for your baby,\npersonal care plan,\nBest possible baby care",
+        "data": [
+          "Dedicated pediatrician for your baby, personal care plan, Best possible baby care",
+          "Everything included in the PRIME Plan",
+          "Dedicated pediatrician just for your baby",
+          "Personalized care plan for your baby and you",
+          "All Consultations and workshops free*",
+          "We keep adding new services to provide more value to you"
+        ]
+      },
+      "price": "3998",
+      "threeMonthPrice": "9999"
+    }
+  ]
